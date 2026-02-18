@@ -5,8 +5,9 @@ import (
 	"log"
 	"os"
 
-	_ "modernc.org/sqlite"                            // SQLite driver without CGO
-	_ "github.com/golang-migrate/migrate/v4/source/file" // <-- this registers the file source
+	_ "modernc.org/sqlite"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/sqlite"
 )
@@ -30,8 +31,8 @@ func main() {
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://cmd/migrate/migrations", // migration folder
-		"sqlite3",
+		"file://cmd/migrate/migrations",
+		"sqlite", // ✅ fixed
 		driver,
 	)
 	if err != nil {
